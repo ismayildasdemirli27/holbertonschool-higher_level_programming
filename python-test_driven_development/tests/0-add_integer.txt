@@ -19,6 +19,22 @@ Float to integer casting:
     >>> add_integer(4.9, 5.1)
     9
 
+Float overflow and NaN handling:
+    >>> add_integer(float('inf'))
+    Traceback (most recent call last):
+        ...
+    OverflowError: cannot convert float infinity to integer
+    
+    >>> add_integer(float('-inf'))
+    Traceback (most recent call last):
+        ...
+    OverflowError: cannot convert float infinity to integer
+    
+    >>> add_integer(float('nan'))
+    Traceback (most recent call last):
+        ...
+    ValueError: cannot convert float NaN to integer
+
 Error handling for invalid types:
     >>> add_integer(4, "School")
     Traceback (most recent call last):
