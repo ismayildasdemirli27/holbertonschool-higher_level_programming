@@ -1,11 +1,11 @@
 ======================================
-0-add_integer funksiyasının testləri
+Tests for 0-add_integer
 ======================================
 
-Funksiyanın import edilməsi:
+Importing the function:
     >>> add_integer = __import__('0-add_integer').add_integer
 
-Sadə toplama əməliyyatları:
+Regular addition:
     >>> add_integer(1, 2)
     3
     >>> add_integer(100, -2)
@@ -15,7 +15,18 @@ Sadə toplama əməliyyatları:
     >>> add_integer(100.3, -2)
     98
 
-Xəta (Exception) testləri:
+Float overflow and NaN edge cases:
+    >>> add_integer(float('inf'), 2)
+    Traceback (most recent call last):
+        ...
+    OverflowError: cannot convert float infinity to integer
+
+    >>> add_integer(2, float('nan'))
+    Traceback (most recent call last):
+        ...
+    ValueError: cannot convert float NaN to integer
+
+Exception tests:
     >>> add_integer(4, "School")
     Traceback (most recent call last):
         ...
