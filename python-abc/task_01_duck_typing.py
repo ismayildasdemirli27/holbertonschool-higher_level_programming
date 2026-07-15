@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-Duck typing module for shapes.
+Module containing Shape abstract class, Circle and Rectangle subclasses,
+and shape_info function for duck typing.
 """
 from abc import ABC, abstractmethod
 import math
