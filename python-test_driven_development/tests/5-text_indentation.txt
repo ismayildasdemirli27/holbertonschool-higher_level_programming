@@ -14,6 +14,7 @@ Regular text:
     I am fine:
     <BLANKLINE>
     great.
+    <BLANKLINE>
 
 Text with lots of extra spaces:
     >>> text_indentation("   Lorem   ipsum.   Dolor sit?  Amet:   consectetur.  ")
@@ -24,6 +25,7 @@ Text with lots of extra spaces:
     Amet:
     <BLANKLINE>
     consectetur.
+    <BLANKLINE>
 
 Exception tests for wrong types:
     >>> text_indentation(123)
