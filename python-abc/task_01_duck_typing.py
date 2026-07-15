@@ -33,8 +33,8 @@ class Circle(Shape):
         return math.pi * (self.radius ** 2)
 
     def perimeter(self):
-        """Calculates the perimeter of the circle."""
-        return 2 * math.pi * self.radius
+        """Calculates the perimeter of the circle using absolute value."""
+        return 2 * math.pi * abs(self.radius)
 
 
 class Rectangle(Shape):
@@ -47,11 +47,11 @@ class Rectangle(Shape):
 
     def area(self):
         """Calculates the area of the rectangle."""
-        return self.width * self.height
+        return abs(self.width) * abs(self.height)
 
     def perimeter(self):
-        """Calculates the perimeter of the rectangle."""
-        return 2 * (self.width + self.height)
+        """Calculates the perimeter of the rectangle using absolute value."""
+        return 2 * (abs(self.width) + abs(self.height))
 
 
 def shape_info(shape):
