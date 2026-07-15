@@ -6,6 +6,8 @@ This module defines a class `MyList` that inherits from `list`.
 
 Usage:
 >>> MyList = __import__('1-my_list').MyList
+
+Basic functionality:
 >>> my_list = MyList()
 >>> my_list.append(1)
 >>> my_list.append(4)
@@ -18,3 +20,21 @@ Usage:
 [1, 2, 3, 4, 5]
 >>> print(my_list)
 [1, 4, 2, 3, 5]
+
+Test with negative numbers:
+>>> my_list_2 = MyList()
+>>> my_list_2.append(-5)
+>>> my_list_2.append(-1)
+>>> my_list_2.append(-10)
+>>> my_list_2.append(0)
+>>> print(my_list_2)
+[-5, -1, -10, 0]
+>>> my_list_2.print_sorted()
+[-10, -5, -1, 0]
+
+Test with an empty list:
+>>> my_list_3 = MyList()
+>>> print(my_list_3)
+[]
+>>> my_list_3.print_sorted()
+[]
