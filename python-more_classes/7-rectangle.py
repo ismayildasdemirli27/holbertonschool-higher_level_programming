@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Defines a rectangle class."""
 
+
 class Rectangle:
     """Represent a rectangle.
 
@@ -60,14 +61,14 @@ class Rectangle:
         return (self.__width * 2) + (self.__height * 2)
 
     def __str__(self):
-        """Return the printable representation of the Rectangle.
-
-        Represents the rectangle with the print_symbol attribute.
-        """
+        """Return the printable representation of the Rectangle."""
         if self.__width == 0 or self.__height == 0:
             return ""
-        
-        return "\n".join([str(self.print_symbol) * self.__width for _ in range(self.__height)])
+
+        rect = []
+        for _ in range(self.__height):
+            rect.append(str(self.print_symbol) * self.__width)
+        return "\n".join(rect)
 
     def __repr__(self):
         """Return the string representation of the Rectangle."""
