@@ -12,10 +12,6 @@ class Rectangle:
     def __init__(self, width=0, height=0):
         """
         Initializes a new Rectangle.
-
-        Args:
-            width (int): The width of the rectangle. Defaults to 0.
-            height (int): The height of the rectangle. Defaults to 0.
         """
         self.width = width
         self.height = height
