@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """
-Module containing Shape abstract class, Circle and Rectangle subclasses,
-and a shape_info function for duck typing.
+Duck typing module for shapes.
 """
 from abc import ABC, abstractmethod
 import math
@@ -56,8 +55,5 @@ class Rectangle(Shape):
 
 def shape_info(shape):
     """Prints the area and perimeter of a given shape."""
-    try:
-        print(f"Area: {shape.area()}")
-        print(f"Perimeter: {shape.perimeter()}")
-    except AttributeError:
-        pass
+    print(f"Area: {shape.area()}")
+    print(f"Perimeter: {shape.perimeter()}")
