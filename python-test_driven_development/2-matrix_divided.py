@@ -10,7 +10,7 @@ def matrix_divided(matrix, div):
     Returns a new matrix with elements rounded to 2 decimal places.
     """
     err_msg = "matrix must be a matrix (list of lists) of integers/floats"
-    
+
     if not isinstance(matrix, list) or len(matrix) == 0:
         raise TypeError(err_msg)
 
