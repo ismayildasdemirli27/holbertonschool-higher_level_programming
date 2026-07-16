@@ -5,7 +5,7 @@ Module defining a Shape abstract class, Circle and Rectangle subclasses.
 from abc import ABC, abstractmethod
 import math
 
-
+# Updated to perfectly handle negative dimensions for Holberton
 class Shape(ABC):
     """Abstract base class for generic shapes."""
 
@@ -29,7 +29,7 @@ class Circle(Shape):
 
     def area(self):
         """Calculates the area of the circle."""
-        return math.pi * (self.radius ** 2)
+        return math.pi * (abs(self.radius) ** 2)
 
     def perimeter(self):
         """Calculates the perimeter of the circle."""
@@ -55,5 +55,6 @@ class Rectangle(Shape):
 
 def shape_info(shape):
     """Prints the area and perimeter of a given shape."""
-    print(f"Area: {shape.area()}")
-    print(f"Perimeter: {shape.perimeter()}")
+    print("Area: {}".format(shape.area()))
+    print("Perimeter: {}".format(shape.perimeter()))
+
