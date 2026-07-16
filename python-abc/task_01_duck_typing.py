@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """
-Module containing Shape abstract class, Circle and Rectangle subclasses,
-and shape_info function for duck typing.
+Module defining a Shape abstract class, Circle and Rectangle subclasses,
+and a shape_info function relying on duck typing.
 """
 from abc import ABC, abstractmethod
 import math
 
 
 class Shape(ABC):
-    """Abstract base class representing a generic shape."""
+    """Abstract base class for generic shapes."""
 
     @abstractmethod
     def area(self):
@@ -22,11 +22,11 @@ class Shape(ABC):
 
 
 class Circle(Shape):
-    """Circle class inheriting from Shape."""
+    """Circle subclass representing a circle shape."""
 
     def __init__(self, radius):
         """Initializes the circle with a radius."""
-        self.radius = radius
+        self.radius = abs(radius)
 
     def area(self):
         """Calculates the area of the circle."""
@@ -34,24 +34,24 @@ class Circle(Shape):
 
     def perimeter(self):
         """Calculates the perimeter of the circle."""
-        return 2 * math.pi * abs(self.radius)
+        return 2 * math.pi * self.radius
 
 
 class Rectangle(Shape):
-    """Rectangle class inheriting from Shape."""
+    """Rectangle subclass representing a rectangle shape."""
 
     def __init__(self, width, height):
         """Initializes the rectangle with width and height."""
-        self.width = width
-        self.height = height
+        self.width = abs(width)
+        self.height = abs(height)
 
     def area(self):
         """Calculates the area of the rectangle."""
-        return abs(self.width) * abs(self.height)
+        return self.width * self.height
 
     def perimeter(self):
         """Calculates the perimeter of the rectangle."""
-        return 2 * (abs(self.width) + abs(self.height))
+        return 2 * (self.width + self.height)
 
 
 def shape_info(shape):
