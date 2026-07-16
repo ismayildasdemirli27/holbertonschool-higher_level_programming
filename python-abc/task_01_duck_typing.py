@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """
-Module defining a Shape abstract class, Circle and Rectangle subclasses,
-and a shape_info function relying on duck typing.
+Module defining a Shape abstract class, Circle and Rectangle subclasses.
 """
 from abc import ABC, abstractmethod
 import math
@@ -26,7 +25,7 @@ class Circle(Shape):
 
     def __init__(self, radius):
         """Initializes the circle with a radius."""
-        self.radius = abs(radius)
+        self.radius = radius
 
     def area(self):
         """Calculates the area of the circle."""
@@ -34,7 +33,7 @@ class Circle(Shape):
 
     def perimeter(self):
         """Calculates the perimeter of the circle."""
-        return 2 * math.pi * self.radius
+        return 2 * math.pi * abs(self.radius)
 
 
 class Rectangle(Shape):
@@ -42,19 +41,19 @@ class Rectangle(Shape):
 
     def __init__(self, width, height):
         """Initializes the rectangle with width and height."""
-        self.width = abs(width)
-        self.height = abs(height)
+        self.width = width
+        self.height = height
 
     def area(self):
         """Calculates the area of the rectangle."""
-        return self.width * self.height
+        return abs(self.width) * abs(self.height)
 
     def perimeter(self):
         """Calculates the perimeter of the rectangle."""
-        return 2 * (self.width + self.height)
+        return 2 * (abs(self.width) + abs(self.height))
 
 
 def shape_info(shape):
     """Prints the area and perimeter of a given shape."""
-    print("Area: {}".format(shape.area()))
-    print("Perimeter: {}".format(shape.perimeter()))
+    print(f"Area: {shape.area()}")
+    print(f"Perimeter: {shape.perimeter()}")
