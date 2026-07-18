@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""This module defines a Student class with serialization and deserialization."""
+"""Module for Student class with JSON serialization."""
 
 
 class Student:
@@ -12,12 +12,12 @@ class Student:
         self.age = age
 
     def to_json(self, attrs=None):
-        """Retrieves a dictionary representation of a Student instance."""
+        """Retrieves a dictionary representation of a Student."""
         if type(attrs) is list and all(type(ele) is str for ele in attrs):
             return {k: v for k, v in self.__dict__.items() if k in attrs}
         return self.__dict__
 
     def reload_from_json(self, json):
-        """Replaces all attributes of the Student instance from a dictionary."""
+        """Replaces all attributes of the Student instance."""
         for key, value in json.items():
             setattr(self, key, value)
