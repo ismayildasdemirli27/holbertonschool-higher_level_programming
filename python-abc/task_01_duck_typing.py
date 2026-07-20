@@ -25,15 +25,15 @@ class Circle(Shape):
 
     def __init__(self, radius=0):
         """Initialize the circle with a radius."""
-        self.radius = abs(radius)
+        self.radius = radius
 
     def area(self):
         """Calculate the area of the circle using math.pi."""
-        return math.pi * (abs(self.radius) ** 2)
+        return math.pi * (self.radius ** 2)
 
     def perimeter(self):
         """Calculate the perimeter of the circle using math.pi."""
-        return 2 * math.pi * abs(self.radius)
+        return 2 * math.pi * self.radius
 
 
 class Rectangle(Shape):
@@ -41,16 +41,16 @@ class Rectangle(Shape):
 
     def __init__(self, width=0, height=0):
         """Initialize the rectangle with width and height."""
-        self.width = abs(width)
-        self.height = abs(height)
+        self.width = width
+        self.height = height
 
     def area(self):
         """Calculate the area of the rectangle."""
-        return abs(self.width) * abs(self.height)
+        return self.width * self.height
 
     def perimeter(self):
         """Calculate the perimeter of the rectangle."""
-        return 2 * (abs(self.width) + abs(self.height))
+        return 2 * (self.width + self.height)
 
 
 def shape_info(shape):
