@@ -6,20 +6,19 @@ hbtn_0e_0_usa where name matches the argument.
 import sys
 import MySQLdb
 
-
 if __name__ == "__main__":
     db = MySQLdb.connect(
         host="localhost",
         port=3306,
         user=sys.argv[1],
         passwd=sys.argv[2],
-        db=sys.argv[3]
+        db=sys.argv[3],
+        charset="utf8"
     )
-    
     cur = db.cursor()
-    # Şərtə uyğun olaraq BINARY və .format() istifadə edirik
-    query = "SELECT * FROM states WHERE name LIKE BINARY '{}' ORDER BY id ASC"
-    cur.execute(query.format(sys.argv[4]))
+    # format metodu birbaşa execute daxilində və states.id ilə yazılır
+    cur.execute("SELECT * FROM states WHERE name LIKE BINARY '{}' "
+                "ORDER BY states.id ASC".format(sys.argv[4]))
     
     for row in cur.fetchall():
         print(row)
