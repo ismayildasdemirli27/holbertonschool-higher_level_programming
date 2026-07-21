@@ -1,45 +1,30 @@
 #!/usr/bin/python3
 """
-this is global enviroment
+Takes in the name of a state as an argument and lists all cities of that
+state, using the database hbtn_0e_4_usa. Safe from SQL injections.
 """
-
-
 import sys
 import MySQLdb
 
 if __name__ == "__main__":
-    """
-        this is local enviroment
-    """
-    username = sys.argv[1]
-    password = sys.argv[2]
-    database = sys.argv[3]
-    state = sys.argv[4]
-
     db = MySQLdb.connect(
         host="localhost",
         port=3306,
-        user=username,
-        passwd=password,
-        db=database
+        user=sys.argv[1],
+        passwd=sys.argv[2],
+        db=sys.argv[3],
+        charset="utf8"
     )
-
-    cursor = db.cursor()
-
-    query = """
-        SELECT cities.name
-        FROM cities
-        INNER JOIN states ON cities.state_id = states.id
-        WHERE states.name = %s
-        ORDER BY cities.id ASC
-        """
-    cursor.execute(query, (state, ))
-
-    states = cursor.fetchall()
-    states_new = []
-    for state in states:
-        states_new.append(state[0])
-    print(", ".join(states_new))
-
-    cursor.close()
+    cur = db.cursor()
+    
+    # Cədvəlləri JOIN edirik və parametrlə inyeksiyadan qoruyuruq
+    query = ("SELECT cities.name FROM cities "
+             "JOIN states ON cities.state_id = states.id "
+             "WHERE states.name = %s ORDER BY cities.id ASC")
+    cur.execute(query, (sys.argv[4],))
+    
+    # Yalnız şəhər adlarını alıb, vergül və boşluqla bir sətirdə birləşdiririk
+    print(", ".join([row[0] for row in cur.fetchall()]))
+    
+    cur.close()
     db.close()
