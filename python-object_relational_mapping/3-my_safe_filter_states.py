@@ -16,8 +16,10 @@ if __name__ == "__main__":
         charset="utf8"
     )
     cur = db.cursor()
-    query = "SELECT * FROM states WHERE name = %s ORDER BY id ASC"
-    cur.execute(query, (sys.argv[4],))
+    
+    # Həm BINARY, həm də %s istifadə edirik
+    cur.execute("SELECT * FROM states WHERE name LIKE BINARY %s "
+                "ORDER BY states.id ASC", (sys.argv[4],))
     
     for row in cur.fetchall():
         print(row)
