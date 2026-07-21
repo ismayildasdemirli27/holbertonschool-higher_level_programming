@@ -1,30 +1,37 @@
 #!/usr/bin/python3
 """
-Lists all states from the database hbtn_0e_0_usa.
-Usage: ./0-select_states.py <mysql username> <mysql password> <database name>
+this is global enviroment
 """
+
+
 import sys
 import MySQLdb
 
 if __name__ == "__main__":
-    # Verilənlər bazasına qoşulma
+    """
+        this is local enviroment
+    """
+    username = sys.argv[1]
+    password = sys.argv[2]
+    database = sys.argv[3]
+
     db = MySQLdb.connect(
         host="localhost",
         port=3306,
-        user=sys.argv[1],
-        passwd=sys.argv[2],
-        db=sys.argv[3]
+        user=username,
+        passwd=password,
+        db=database
     )
-    
-    # Kursor yaradılması və sorğunun icrası
-    cur = db.cursor()
-    cur.execute("SELECT * FROM states ORDER BY id ASC")
-    
-    # Nəticələrin ekrana yazdırılması
-    query_rows = cur.fetchall()
-    for row in query_rows:
-        print(row)
-        
-    # Əlaqələrin bağlanması
-    cur.close()
+
+    cursor = db.cursor()
+
+    query = "SELECT * FROM states ORDER BY id ASC;"
+    cursor.execute(query)
+
+    states = cursor.fetchall()
+
+    for state in states:
+        print(state)
+
+    cursor.close()
     db.close()
