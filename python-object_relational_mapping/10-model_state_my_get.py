@@ -1,33 +1,27 @@
 #!/usr/bin/python3
 """
-List all State objects from the database
+Prints the State object with the name passed as argument from the database.
 """
-
-from sys import argv
+import sys
+from model_state import Base, State
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from model_state import Base, State
 
 if __name__ == "__main__":
-    usnm = argv[1]
-    pwd = argv[2]
-    db = argv[3]
-    name = argv[4]
-
-    engine = create_engine(f"mysql+mysqldb://{usnm}:{pwd}@localhost:3306/{db}")
-
+    # Verilənlər bazasına qoşuluruq
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'.format(
+        sys.argv[1], sys.argv[2], sys.argv[3]), pool_pre_ping=True)
+    
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    states = (
-      session.query(State)
-      .filter(State.name == name)
-      .order_by(State.id)
-      .all()
-    )
+    # Parametr olaraq verilən adı axtarırıq (.first() istifadə edərək)
+    state = session.query(State).filter(State.name == sys.argv[4]).first()
 
-    if not states:
-        print("Not found")
+    # Əgər tapıldırsa yalnız ID-ni, yoxdursa "Not found" çap edirik
+    if state:
+        print(state.id)
     else:
-        for state in states:
-            print(state.id)
+        print("Not found")
+        
+    session.close()
