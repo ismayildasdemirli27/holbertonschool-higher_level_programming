@@ -1,26 +1,27 @@
 #!/usr/bin/python3
 """
-List all State objects from the database
+Prints the first State object from the database hbtn_0e_6_usa.
 """
-
-from sys import argv
+import sys
+from model_state import Base, State
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from model_state import Base, State
 
 if __name__ == "__main__":
-    usnm = argv[1]
-    pwd = argv[2]
-    db = argv[3]
-
-    engine = create_engine(f"mysql+mysqldb://{usnm}:{pwd}@localhost:3306/{db}")
-
+    # Verilənlər bazasına qoşuluruq
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'.format(
+        sys.argv[1], sys.argv[2], sys.argv[3]), pool_pre_ping=True)
+    
     Session = sessionmaker(bind=engine)
     session = Session()
 
+    # Yalnız İLK obyekti çəkirik (.first() istifadə edərək)
     first_state = session.query(State).order_by(State.id).first()
 
+    # Əgər tapıldırsa çap edirik, cədvəl boşdursa "Nothing" yazdırırıq
     if first_state:
-        print(f"{first_state.id}: {first_state.name}")
+        print("{}: {}".format(first_state.id, first_state.name))
     else:
         print("Nothing")
+        
+    session.close()
