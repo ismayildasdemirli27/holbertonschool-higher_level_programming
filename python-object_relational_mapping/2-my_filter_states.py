@@ -1,38 +1,28 @@
 #!/usr/bin/python3
 """
-this is global enviroment
+Takes in an argument and displays all values in the states table of
+hbtn_0e_0_usa where name matches the argument.
 """
-
-
 import sys
 import MySQLdb
 
-if __name__ == "__main__":
-    """
-        this is local enviroment
-    """
-    username = sys.argv[1]
-    password = sys.argv[2]
-    database = sys.argv[3]
-    name = sys.argv[4]
 
+if __name__ == "__main__":
     db = MySQLdb.connect(
         host="localhost",
         port=3306,
-        user=username,
-        passwd=password,
-        db=database
+        user=sys.argv[1],
+        passwd=sys.argv[2],
+        db=sys.argv[3]
     )
-
-    cursor = db.cursor()
-
-    query = 'SELECT * FROM states WHERE BINARY name = "{}"'.format(name)
-    cursor.execute(query)
-
-    states = cursor.fetchall()
-
-    for state in states:
-        print(state)
-
-    cursor.close()
+    
+    cur = db.cursor()
+    # Şərtə uyğun olaraq BINARY və .format() istifadə edirik
+    query = "SELECT * FROM states WHERE name LIKE BINARY '{}' ORDER BY id ASC"
+    cur.execute(query.format(sys.argv[4]))
+    
+    for row in cur.fetchall():
+        print(row)
+        
+    cur.close()
     db.close()
